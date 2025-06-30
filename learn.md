@@ -1,6 +1,7 @@
 # TIL - 2025-06-30
 
 ## 📌 JavaScript
+guess-Number
 - `Math.random()`과 `Math.floor()`를 사용해서 1~100까지의 랜덤 숫자 생성
 - DOM 요소 접근: `getElementById()`
 - 입력값 유효성 검사 함수 `inputUnum(value)`를 통해 숫자 범위 체크
@@ -34,7 +35,6 @@
 ---
 
 ### 🔹 가상 클래스 (Pseudo-classes)
-
 스타일을 조건부로 적용하는 선택자
 
 - **`:hover`**: 마우스를 올렸을 때
