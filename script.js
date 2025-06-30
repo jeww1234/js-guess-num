@@ -1,5 +1,11 @@
 let computerNum = 0
-
+let playbtn = document.getElementById("playbtn")
+let uinput = document.getElementById("uinput")
+let resultarea = document.getElementById("result-area")
+let resetbtn = document.getElementById("resetbtn")
+let chances = 5
+let gameOver = false
+let chance = document.getElementById("chance")
 
 
 pickRandomNum = () =>{
@@ -9,14 +15,20 @@ pickRandomNum = () =>{
 
 pickRandomNum()
 
-let playbtn = document.getElementById("playbtn")
-let uinput = document.getElementById("uinput")
-let resultarea = document.getElementById("result-area")
-let resetbtn = document.getElementById("resetbtn")
-let chances = 5
-let gameOver = false
-let chance = document.getElementById("chance")
-
+inputUnum = (uvalue) =>{
+    if(uvalue > 100){
+        resultarea.textContent = "100보다 작거나 같은 숫자! 입력"
+        return false
+    }
+    else if(uvalue < 1){
+        resultarea.textContent = "1보다 크거나 같은 숫자! 입력"
+        return false
+    }
+    else{
+        chances --
+        return true
+    }
+}
 
 playgame = () =>{let uvalue = uinput.value
     if(!inputUnum(uvalue)) return    
@@ -54,20 +66,7 @@ reset = () =>{
     playbtn.disabled = false
 }
 
-inputUnum = (uvalue) =>{
-    if(uvalue > 100){
-        resultarea.textContent = "100보다 작거나 같은 숫자! 입력"
-        return false
-    }
-    else if(uvalue < 1){
-        resultarea.textContent = "1보다 크거나 같은 숫자! 입력"
-        return false
-    }
-    else{
-        chances --
-        return true
-    }
-}
+
 
 playbtn.addEventListener("click", playgame);
 resetbtn.addEventListener("click", reset)
