@@ -1,74 +1,78 @@
-let computerNum = 0
-let playbtn = document.getElementById("playbtn")
-let uinput = document.getElementById("uinput")
-let resultarea = document.getElementById("result-area")
-let resetbtn = document.getElementById("resetbtn")
-let chances = 5
-let gameOver = false
-let chance = document.getElementById("chance")
+let taskInput = document.getElementById("task-input")
+let addButton = document.getElementById("add-button")
+let tabs = document.querySelectorAll(".task-tabs div")
+let taskList = []
 
 
-pickRandomNum = () =>{
-    computerNum = Math.floor(Math.random() * 100) + 1
-    console.log(computerNum)
+
+filter = (event) =>{
+    console.log("event")
 }
 
-pickRandomNum()
-
-inputUnum = (uvalue) =>{
-    if(uvalue > 100){
-        resultarea.textContent = "100보다 작거나 같은 숫자! 입력"
-        return false
-    }
-    else if(uvalue < 1){
-        resultarea.textContent = "1보다 크거나 같은 숫자! 입력"
-        return false
-    }
-    else{
-        chances --
-        return true
-    }
+for(let i=1; i<tabs.length; i++){
+    tabs[i].addEventListener("click", (event)=>{filter(event)})
 }
 
-playgame = () =>{let uvalue = uinput.value
-    if(!inputUnum(uvalue)) return    
-    console.log(uvalue)
-    inputUnum(uvalue)
-
-    if(uvalue > 0 && uvalue < 101){
-    chance.textContent = `남은 기회 ${chances}`
-
-    if(uvalue > computerNum){
-        resultarea.textContent = "down!"
-    }
-    else if(uvalue < computerNum){
-        resultarea.textContent = "up!"
-    }else{
-        resultarea.textContent = "정답"
-    }
-
-    if(chances < 1){
-        gameOver = true
-        resultarea.textContent = "gameover"
-    }
-    if(gameOver == true){
-        playbtn.disabled = true
-    }
-}}
-
-reset = () =>{
-    uvalue = ""
-    chances = 5
-    gameOver = false
-    pickRandomNum()
-    resultarea.textContent = "결과"
-    chance.textContent = `남은 기회 ${chances}`
-    playbtn.disabled = false
+randomIDGenerate = () =>{
+    return '_' + Math.random().toString(36).substr(2, 9);
 }
 
+addTask = () =>{    
+    let task = {
+        id:randomIDGenerate(),
+        taskContent: taskInput.value,
+        isComplete: false
+    }
+    taskList.push(task)
+    render()
 
+}
+toggleComplete = (id) =>{
+    console.log(id)
+    for(let i = 0; i<taskList.length; i++){
+        if(taskList[i].id == id){
+            taskList[i].isComplete = !taskList[i].isComplete
+            break
+        }
+    }
+    render()
+}
 
-playbtn.addEventListener("click", playgame);
-resetbtn.addEventListener("click", reset)
+deleteTask = (id) =>{
+    console.log(id)
+    for(let i = 0; i<taskList.length; i++){
+        if(taskList[i].id == id){
+            taskList.splice(i, 1)
+            break
+        }
+    }
+    render()
 
+}
 
+render = () =>{
+    let resultHTML = ''
+    for(let i = 0; i < taskList.length; i++){
+        if(taskList[i].isComplete ===  true){
+            resultHTML += `<div class="task">
+            <div class='task-done'>${taskList[i].taskContent}</div>
+            <div>
+              <button onclick="toggleComplete('${taskList[i].id}')">Check</button>
+              <button onclick="deleteTask('${taskList[i].id}')">Delete</button>
+            </div>
+          </div>`
+        }
+        else{
+            resultHTML += `<div class="task">
+            <div>${taskList[i].taskContent}</div>
+            <div>
+              <button onclick="toggleComplete('${taskList[i].id}')">Check</button>
+              <button onclick="deleteTask('${taskList[i].id}')">Delete</button>
+            </div>
+          </div>`
+        }        
+    }
+    document.getElementById("task-board").innerHTML = resultHTML
+}
+
+addButton.addEventListener("click", addTask)
