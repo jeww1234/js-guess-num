@@ -5,7 +5,8 @@ let taskList = []
 let mode = 'all'
 let filterList = []
 
-filter = (event) =>{    
+
+filter = (event) =>{   
     filterList = []
     mode = event.target.id
     if(mode === "all"){
@@ -35,7 +36,8 @@ filter = (event) =>{
 }
 
 for(let i=1; i<tabs.length; i++){
-    tabs[i].addEventListener("click", (event)=>{filter(event)})
+    tabs[i].addEventListener("click", (event)=>{console.log(event);
+ filter(event)})
 }
 
 randomIDGenerate = () =>{
@@ -66,11 +68,11 @@ toggleComplete = (id) =>{
 deleteTask = (id) =>{
     console.log(id)
     for(let i = 0; i<taskList.length; i++){
+
         if(taskList[i].id == id){
                 taskList.splice(i, 1)
                 filter({target:{id: mode}})
-            break
-        }
+                    }
     }
     render()
 
