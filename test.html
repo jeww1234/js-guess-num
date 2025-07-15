@@ -1,15 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-  
+  <section class="container">
+    <div>
+      <input id="search-input">
+      <button onclick="getNextByKeyword()">검색</button>
+    </div>
+
+    <section>
+      <div class="head-line">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/The_New_York_Times_logo.png" alt="#">
+      </div>
+      <div class="menus">
+        <button type="button">Technology</button>
+        <button type="button">Health</button>
+        <button type="button">Sports</button>
+        <button type="button">Business</button>
+        <button type="button">General</button>
+        <button type="button">Entertainment</button>
+        <button type="button">Science</button>
+      </div>
+    </section>
+    <section id="news-board">
+
+    </section>
+  </section>
 
 
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"></script>
   <script src="./script.js"></script>
 </body>
+
 </html>
